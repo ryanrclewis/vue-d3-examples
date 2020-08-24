@@ -20,30 +20,96 @@ export default {
 
     // 准备数据
     // 节点集
-    let nodes = [
-      { name: '湖南邵阳' },
-      { name: '山东泰安' },
-      { name: '广东阳江' },
-      { name: '山西太原' },
-      { name: '亮' },
-      { name: '丽' },
-      { name: '雪' },
-      { name: '小明' },
-      { name: '组长' }
-    ]
+    let baseNodes = [
+    //coetic org
+    { id: "coetic", group_id: 0, label: "Coetic", level: 1 },
+    //groups
+    { id: "engineer", group_id: 0, label: "Engineers", level: 2 },
+    { id: "customer", group_id: 3, label: "Customer Experience", level: 2 },
+    { id: "consultant", group_id: 1, label: "Consulting & Content", level: 2 },
+    //groups
+    { id: "woether", group_id: 0, label: "Woether", level: 3 },
+    { id: "em360", group_id: 0, label: "EM360", level: 3 },
+    //members
+    { id: "rick", group_id: 2, label: "Rick DeShon", role: "", level: 4 },
+    { id: "karen", label: "Karen DeShon", level: 4 },
+    { id: "sam", label: "Sam Coffey", level: 4 },
+    { id: "rebecca", label: "Rebecca Sinkoff", level: 4 },
+    { id: "scott", label: "Scott James", level: 4 },
+    { id: "konglin", label: "Konglin Zhu", level: 4 },
+    { id: "austin", label: "Austin Pfeil", level: 4 },
+    { id: "noah", label: "Noah Stewart", level: 4 },
+    { id: "hadley", label: "Hadley Gaines", level: 4 },
+    { id: "jake", label: "Jake Bosio", level: 4 },
+    { id: "owen", label: "Owen O'Brien", level: 4 },
+    { id: "megan", label: "Megan Jursch", level: 4 },
+    { id: "grace", label: "Grace Martin", level: 4 },
+    { id: "ryan", label: "Ryan R. C. Lewis", level: 4 },
+    { id: "stu", label: "Stuart Clapp", level: 4 },
+    { id: "zach", label: "Zach Martis", level: 4 },
+  ];
     // 边集
-    let edges = [
-      { source: 0, target: 4, relation: '籍贯', value: 1.3 },
-      { source: 4, target: 5, relation: '舍友', value: 1 },
-      { source: 4, target: 6, relation: '舍友', value: 1 },
-      { source: 4, target: 7, relation: '舍友', value: 1 },
-      { source: 1, target: 6, relation: '籍贯', value: 2 },
-      { source: 2, target: 5, relation: '籍贯', value: 0.9 },
-      { source: 3, target: 7, relation: '籍贯', value: 1 },
-      { source: 5, target: 6, relation: '同学', value: 1.6 },
-      { source: 6, target: 7, relation: '朋友', value: 0.7 },
-      { source: 6, target: 8, relation: '职责', value: 2 }
-    ]
+    let baseLinks = [
+    //coetic org links
+    { target: "engineer", source: "coetic", strength: 0.1 },
+    { target: "consultant", source: "coetic", strength: 0.1 },
+    { target: "customer", source: "coetic", strength: 0.1 },
+    //coetic org links
+    { target: "woether", source: "coetic", strength: 0.1 },
+    { target: "em360", source: "coetic", strength: 0.1 },
+    //sam links
+    { target: "em360", source: "sam", strength: 0.1 },
+    { target: "engineer", source: "sam", strength: 0.1 },
+    //rebecca links
+    { target: "woether", source: "rebecca", strength: 0.1 },
+    { target: "engineer", source: "rebecca", strength: 0.1 },
+
+    //scott links
+    { target: "woether", source: "scott", strength: 0.1 },
+    { target: "engineer", source: "scott", strength: 0.1 },
+    //konglin links
+    { target: "engineer", source: "konglin", strength: 0.1 },
+    //austin links
+    { target: "em360", source: "austin", strength: 0.1 },
+    { target: "engineer", source: "austin", strength: 0.1 },
+    //noah links
+    { target: "em360", source: "noah", strength: 0.1 },
+    { target: "engineer", source: "noah", strength: 0.1 },
+    //hadley links
+    { target: "woether", source: "hadley", strength: 0.1 },
+    { target: "engineer", source: "hadley", strength: 0.1 },
+    //jake links
+    { target: "em360", source: "jake", strength: 0.1 },
+    { target: "engineer", source: "jake", strength: 0.1 },
+    //owen links
+    { target: "woether", source: "owen", strength: 0.1 },
+    { target: "engineer", source: "owen", strength: 0.1 },
+    //megan links
+    { target: "consultant", source: "megan", strength: 0.1 },
+    //grace links
+    { target: "consultant", source: "grace", strength: 0.1 },
+    //rick links
+    { target: "coetic", source: "rick", strength: 0.1 },
+    { target: "engineer", source: "rick", strength: 0.1 },
+    { target: "customer", source: "rick", strength: 0.1 },
+    { target: "em360", source: "rick", strength: 0.1 },
+    { target: "woether", source: "rick", strength: 0.1 },
+    //karen links
+    { target: "coetic", source: "karen", strength: 0.1 },
+    { target: "consultant", source: "karen", strength: 0.1 },
+    { target: "customer", source: "karen", strength: 0.1 },
+    //ryan links
+    { target: "customer", source: "ryan", strength: 0.1 },
+    { target: "woether", source: "ryan", strength: 0.1 },
+    { target: "em360", source: "ryan", strength: 0.1 },
+    //stu links
+    { target: "customer", source: "stu", strength: 0.1 },
+    { target: "em360", source: "stu", strength: 0.1 },
+    { target: "woether", source: "stu", strength: 0.1 },
+    //zach links
+    { target: "customer", source: "zach", strength: 0.1 },
+    { target: "woether", source: "zach", strength: 0.1 },
+  ]
     // 设置一个颜色比例尺
     let colorScale = d3.scaleOrdinal()
       .domain(d3.range(nodes.length))
